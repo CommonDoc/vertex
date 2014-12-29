@@ -137,4 +137,13 @@
 
 ;; Tables
 
+(define-transform "cell" (children)
+  (make-instance '<cell> :children (transform children)))
+
+(define-transform "row" (cells)
+  (make-instance '<row> :children (transform cells)))
+
+(define-transform "table" (rows)
+  (make-instance '<table> :rows (transform rows)))
+
 ;; Structure
