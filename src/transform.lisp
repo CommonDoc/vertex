@@ -41,6 +41,16 @@
 
 ;;; Utilities
 
+(defun find-tag-by-name (tag-name vector)
+  (find-if #'(lambda (node)
+               (equal (plump:tag-name node) tag-name))
+           vector))
+
+(defun tags-without-name (tag-name vector)
+  (find-if-not #'(lambda (node)
+                   (equal (plump:tag-name node) tag-name))
+               vector))
+
 ;;; Variables
 
 (defparameter *transforms* (make-hash-table :test #'equal))
@@ -121,14 +131,8 @@
                  :description (gethash "desc" attributes)))
 
 (define-transform "figure" (children)
-  (let ((image
-          (find-if #'(lambda (node)
-                       (equal (plump:tag-name node) "image"))
-                   children))
-        (description
-          (find-if-not #'(lambda (node)
-                           (equal (plump:tag-name node) "image"))
-                       children)))
+  (let ((image (find-tag-by-name "image" children))
+        (description (tags-without-name "image" children)))
     (make-instance '<figure>
                    :image image
                    :description
@@ -147,3 +151,16 @@
   (make-instance '<table> :rows (transform rows)))
 
 ;; Structure
+
+(define-attr-transform "section" (attributes children)
+  (let ((title (aif (gethash "title" attributes)
+                    ;; We got the title from the attributes
+                    (make-instance '<text-node>
+                                   :text it)
+                    ;; Otherwise, look for a title tag in the children
+                    (aif (find-tag-by-name "title" children)
+                         (transform it)
+                         (error "Untitled section."))))
+        (children (tags-without-name "title" children))
+        (reference (gethash "ref" attributes)))
+    (make-instance '<section> :title title :reference reference :children children)))
