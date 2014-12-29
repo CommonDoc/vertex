@@ -7,7 +7,7 @@
 
 ;;; Variables
 
-(defparameter *transforms* (make-hash-table))
+(defparameter *transforms* (make-hash-table :test #'equal))
 
 ;;; Methods
 
@@ -19,10 +19,8 @@
                  :text (plump:text node)))
 
 (defmethod transform ((vec vector))
-  (make-instance 'common-doc:<content-node>
-                 :children
-                 (loop for elem across vec collecting
-                   (transform elem))))
+  (loop for elem across vec collecting
+    (transform elem)))
 
 (defmethod transform ((root plump:root))
   (transform (plump:children root)))
@@ -37,8 +35,21 @@
 
 ;;; Transforms
 
-(defmacro define-transform (name (attrs &rest args) &rest body)
+(defmacro define-attr-transform (name (attrs args) &rest body)
   `(setf (gethash ,name *transforms*)
-         #'(lambda (,attrs list)
-             (destructuring-bind ,args list
-               ,@body))))
+         #'(lambda (,attrs ,args)
+             ,@body)))
+
+(defmacro define-transform (name (args) &rest body)
+  `(setf (gethash ,name *transforms*)
+         #'(lambda (attrs ,args)
+             (declare (ignore attrs))
+             ,@body)))
+
+;; Basic stuff
+
+(define-transform "p" (children)
+  (make-instance 'common-doc:<paragraph>
+                 :children (transform children)))
+
+;; Markup
