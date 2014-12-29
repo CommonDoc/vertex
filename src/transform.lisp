@@ -113,6 +113,17 @@
 
 ;; Code
 
+(define-attr-transform "code" (attributes children)
+  (let ((language (gethash "lang" attributes)))
+    (unless language
+      (error "Need to specify a language tag."))
+    (make-instance '<code>
+                   :language language
+                   :children (transform children))))
+
+(define-transform "verb" (children)
+  (make-instance '<verbatim> :text (plump-tex:serialize children)))
+
 ;; Quotes
 
 (define-trivial-transform "q" <inline-quote>)
@@ -121,6 +132,8 @@
 ;; Links
 
 ;; Lists
+
+(define-trivial-transform "item" <list-item>)
 
 ;; Figures
 
