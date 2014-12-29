@@ -1,6 +1,40 @@
 (in-package :cl-user)
 (defpackage vertex.transform
   (:use :cl :anaphora)
+  (:import-from :common-doc
+                :<content-node>
+           :<text-node>
+               :<paragraph>
+               :<markup>
+               :<bold>
+               :<italic>
+               :<underline>
+               :<strikethrough>
+               :<code>
+               :<superscript>
+               :<subscript>
+               :<code-block>
+               :<verbatim>
+               :<quote>
+               :<inline-quote>
+               :<block-quote>
+               :<link>
+               :<internal-link>
+               :<external-link>
+               :<web-link>
+               :<list>
+               :<list-item>
+               :<definition>
+               :<unordered-list>
+               :<ordered-list>
+               :<definition-list>
+               :<image>
+               :<figure>
+               :<table>
+               :<row>
+               :<cell>
+               :<section>
+               :<document>)
   (:export :transform)
   (:documentation "Transform a plump-tex document into a CommonDoc document."))
 (in-package :vertex.transform)
@@ -15,7 +49,7 @@
   (:documentation "Transform a plump-tex node into a CommonDoc node."))
 
 (defmethod transform ((node plump:text-node))
-  (make-instance 'common-doc:<text-node>
+  (make-instance '<text-node>
                  :text (plump:text node)))
 
 (defmethod transform ((vec vector))
@@ -49,7 +83,7 @@
 ;; Basic stuff
 
 (define-transform "p" (children)
-  (make-instance 'common-doc:<paragraph>
+  (make-instance '<paragraph>
                  :children (transform children)))
 
 ;; Markup
