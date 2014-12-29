@@ -135,11 +135,14 @@
 
 (define-trivial-transform "item" <list-item>)
 
-(define-transform "list" (children)
-  (make-instance '<unordered-list> :items (transform children)))
+(define-transform "list" (items)
+  (make-instance '<unordered-list> :items (transform items)))
 
-(define-transform "enum" (children)
-  (make-instance '<ordered-list> :items (transform children)))
+(define-transform "enum" (items)
+  (make-instance '<ordered-list> :items (transform items)))
+
+(define-transform "deflist" (items)
+  (make-instance '<definition-list> :items (transform items)))
 
 ;; Figures
 
