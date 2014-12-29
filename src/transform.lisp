@@ -39,6 +39,8 @@
   (:documentation "Transform a plump-tex document into a CommonDoc document."))
 (in-package :vertex.transform)
 
+;;; Utilities
+
 ;;; Variables
 
 (defparameter *transforms* (make-hash-table :test #'equal))
@@ -80,10 +82,59 @@
              (declare (ignore attrs))
              ,@body)))
 
+(defmacro define-trivial-transform (name class)
+  `(define-transform ,name (children)
+     (make-instance ',class
+                    :children (transform children))))
+
 ;; Basic stuff
 
-(define-transform "p" (children)
-  (make-instance '<paragraph>
-                 :children (transform children)))
+(define-trivial-transform "p" <paragraph>)
 
 ;; Markup
+
+(define-trivial-transform "b" <bold>)
+(define-trivial-transform "i" <italic>)
+(define-trivial-transform "u" <underline>)
+(define-trivial-transform "strike" <strikethrough>)
+(define-trivial-transform "code" <code>)
+(define-trivial-transform "sup" <superscript>)
+(define-trivial-transform "sub" <subscript>)
+
+;; Code
+
+;; Quotes
+
+(define-trivial-transform "q" <inline-quote>)
+(define-trivial-transform "quote" <block-quote>)
+
+;; Links
+
+;; Lists
+
+;; Figures
+
+(define-attr-transform "image" (attributes children)
+  (declare (ignore children))
+  (make-instance '<image>
+                 :source (gethash "source" attributes)
+                 :description (gethash "desc" attributes)))
+
+(define-transform "figure" (children)
+  (let ((image
+          (find-if #'(lambda (node)
+                       (equal (plump:tag-name node) "image"))
+                   children))
+        (description
+          (find-if-not #'(lambda (node)
+                           (equal (plump:tag-name node) "image"))
+                       children)))
+    (make-instance '<figure>
+                   :image image
+                   :description
+                   (make-instance '<content-node>
+                                  :children (transform description)))))
+
+;; Tables
+
+;; Structure
