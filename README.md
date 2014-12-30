@@ -1,5 +1,7 @@
 # VerTeX
 
+[![Build Status](https://travis-ci.org/CommonDoc/vertex.svg?branch=master)](https://travis-ci.org/CommonDoc/vertex)
+
 A markup language with TeX syntax.
 
 # License
