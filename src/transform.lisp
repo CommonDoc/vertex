@@ -51,6 +51,16 @@
                    (equal (plump:tag-name node) tag-name))
                vector))
 
+(defun pop-by-name (tag-name vector)
+  (delete-if #'(lambda (node)
+                 (when (plump:element-p node)
+                   (equal (plump:tag-name node) tag-name)))
+             vector :count 1))
+
+(defun serialize-to-string (node)
+  (with-output-to-string (str)
+    (plump-tex:serialize node str)))
+
 ;;; Variables
 
 (defparameter *transforms* (make-hash-table :test #'equal))
@@ -69,7 +79,8 @@
     (transform elem)))
 
 (defmethod transform ((root plump:root))
-  (transform (plump:children root)))
+  (make-instance '<document>
+                 :children (transform (plump:children root))))
 
 (defmethod transform ((node plump:element))
   (let ((name (plump:tag-name node))
@@ -113,16 +124,17 @@
 
 ;; Code
 
-(define-attr-transform "code" (attributes children)
+(define-attr-transform "codeblock" (attributes children)
   (let ((language (gethash "lang" attributes)))
     (unless language
       (error "Need to specify a language tag."))
-    (make-instance '<code>
+    (make-instance '<code-block>
                    :language language
                    :children (transform children))))
 
 (define-transform "verb" (children)
-  (make-instance '<verbatim> :text (plump-tex:serialize children)))
+  (make-instance '<verbatim>
+                 :text (serialize-to-string children)))
 
 ;; Quotes
 
@@ -133,8 +145,6 @@
 
 ;; Lists
 
-(define-trivial-transform "item" <list-item>)
-
 (define-transform "list" (items)
   (make-instance '<unordered-list> :items (transform items)))
 
@@ -143,6 +153,16 @@
 
 (define-transform "deflist" (items)
   (make-instance '<definition-list> :items (transform items)))
+
+(define-trivial-transform "item" <list-item>)
+
+(define-transform "def" (children)
+  (let ((term (find-tag-by-name "term" children))
+        (definition (tags-without-name "term" children)))
+    (make-instance '<definition>
+                   :term (transform term)
+                   :definition (make-instance '<content-node>
+                                              :children (transform definition)))))
 
 ;; Figures
 
