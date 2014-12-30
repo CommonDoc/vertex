@@ -21,11 +21,6 @@
     (is
      (equal (text (first-child doc)) "test"))))
 
-(defmacro verbatim-check (text)
-  `(with-first-doc (,(format nil "\\verb{~A}" text) doc)
-     (is-true (typep doc '<verbatim>))
-     (is (equal (text doc) ,text))))
-
 ;;; Tests
 
 (def-suite tests
@@ -58,10 +53,5 @@
   (with-first-doc ("\\codeblock[lang=lisp]{test}" doc)
     (is-true (typep doc '<code-block>))
     (is (equal (language doc) "lisp"))))
-
-(test verbatim
-  (verbatim-check "test")
-  (verbatim-check "a \\b{2} b")
-  (verbatim-check "\\a{\\b{\\c{test}}}"))
 
 (run! 'tests)

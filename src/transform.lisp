@@ -14,7 +14,6 @@
                 :<superscript>
                 :<subscript>
                 :<code-block>
-                :<verbatim>
                 :<quote>
                 :<inline-quote>
                 :<block-quote>
@@ -59,10 +58,6 @@
                  (if (plump:element-p node)
                      (equal (plump:tag-name node) tag-name)))
              vector :count 1))
-
-(defun serialize-to-string (node)
-  (with-output-to-string (str)
-    (plump-tex:serialize node str)))
 
 ;;; Variables
 
@@ -134,10 +129,6 @@
     (make-instance '<code-block>
                    :language language
                    :children (transform children))))
-
-(define-transform "verb" (children)
-  (make-instance '<verbatim>
-                 :text (serialize-to-string children)))
 
 ;; Quotes
 
