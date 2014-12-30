@@ -10,7 +10,8 @@
                 :serial t
                 :components
                 ((:file "transform")
-                 (:file "parser"))))
+                 (:file "parser")
+                 (:file "vertex"))))
   :description "A markup language with TeX syntax."
   :long-description
   #.(uiop:read-file-string
