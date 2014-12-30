@@ -48,10 +48,11 @@
            vector))
 
 (defun tags-without-name (tag-name vector)
-  (find-if-not #'(lambda (node)
-                   (if (plump:element-p node)
-                       (equal (plump:tag-name node) tag-name)))
-               vector))
+  (remove-if-not #'(lambda (node)
+                     (if (plump:element-p node)
+                         (not (equal (plump:tag-name node) tag-name))
+                         t))
+                 vector))
 
 (defun pop-by-name (tag-name vector)
   (delete-if #'(lambda (node)
@@ -162,7 +163,7 @@
   (let ((term (find-tag-by-name "term" children))
         (definition (tags-without-name "term" children)))
     (make-instance '<definition>
-                   :term (transform term)
+                   :term (transform (plump:children term))
                    :definition (make-instance '<content-node>
                                               :children (transform definition)))))
 
