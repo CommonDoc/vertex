@@ -9,8 +9,8 @@
   :components ((:module "src"
                 :serial t
                 :components
-                ((:file "parser")
-                 (:file "transform"))))
+                ((:file "transform")
+                 (:file "parser"))))
   :description "A markup language with TeX syntax."
   :long-description
   #.(uiop:read-file-string
