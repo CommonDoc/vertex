@@ -43,18 +43,20 @@
 
 (defun find-tag-by-name (tag-name vector)
   (find-if #'(lambda (node)
-               (equal (plump:tag-name node) tag-name))
+               (if (plump:element-p node)
+                   (equal (plump:tag-name node) tag-name)))
            vector))
 
 (defun tags-without-name (tag-name vector)
   (find-if-not #'(lambda (node)
-                   (equal (plump:tag-name node) tag-name))
+                   (if (plump:element-p node)
+                       (equal (plump:tag-name node) tag-name)))
                vector))
 
 (defun pop-by-name (tag-name vector)
   (delete-if #'(lambda (node)
-                 (when (plump:element-p node)
-                   (equal (plump:tag-name node) tag-name)))
+                 (if (plump:element-p node)
+                     (equal (plump:tag-name node) tag-name)))
              vector :count 1))
 
 (defun serialize-to-string (node)
