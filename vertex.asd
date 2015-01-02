@@ -4,7 +4,7 @@
   :license "MIT"
   :version "0.1"
   :depends-on (:common-doc
-               :common-plump
+               :common-doc-plump
                :plump-tex)
   :components ((:module "src"
                 :serial t
