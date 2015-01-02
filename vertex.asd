@@ -4,13 +4,12 @@
   :license "MIT"
   :version "0.1"
   :depends-on (:common-doc
-               :plump-tex
-               :anaphora)
+               :common-plump
+               :plump-tex)
   :components ((:module "src"
                 :serial t
                 :components
-                ((:file "transform")
-                 (:file "parser")
+                ((:file "parser")
                  (:file "vertex"))))
   :description "A markup language with TeX syntax."
   :long-description

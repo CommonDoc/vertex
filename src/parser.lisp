@@ -6,8 +6,11 @@
   (:documentation "Parse a TeX file into a CommonDoc document."))
 (in-package :vertex.parser)
 
+(defun input->common-doc (input)
+  (common-plump.parser:parse (plump-tex:parse input)))
+
 (defun parse-string (string)
-  (vertex.transform:transform (plump-tex:parse string)))
+  (input->common-doc string))
 
 (defun parse-file (pathname)
-  (vertex.transform:transform (plump-tex:parse pathname)))
+  (input->common-doc pathname))
