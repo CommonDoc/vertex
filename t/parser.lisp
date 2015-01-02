@@ -41,7 +41,7 @@
   (trivial-check "i" <italic>)
   (trivial-check "u" <underline>)
   (trivial-check "strike" <strikethrough>)
-  (trivial-check "code" <code>)
+  (trivial-check "c" <code>)
   (trivial-check "sup" <superscript>)
   (trivial-check "sub" <subscript>))
 
@@ -50,7 +50,7 @@
   (trivial-check "quote" <block-quote>))
 
 (test code-block
-  (with-first-doc ("\\codeblock[lang=lisp]{test}" doc)
+  (with-first-doc ("\\code[language=lisp]{test}" doc)
     (is-true (typep doc '<code-block>))
     (is (equal (language doc) "lisp"))))
 
