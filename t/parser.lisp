@@ -10,12 +10,12 @@
 (defun first-child (document)
   (first (children document)))
 
-(defmacro with-first-doc ((string doc) &rest body)
-  `(let ((,doc (first-child (parse-string ,string))))
+(defmacro with-doc ((string doc) &rest body)
+  `(let ((,doc (parse-string ,string)))
      ,@body))
 
 (defmacro trivial-check (tag class)
-  `(with-first-doc (,(format nil "\\~A{test}" tag) doc)
+  `(with-doc (,(format nil "\\~A{test}" tag) doc)
     (is-true
      (typep doc ',class))
     (is
@@ -28,7 +28,7 @@
 (in-suite tests)
 
 (test text
-  (with-first-doc ("test" doc)
+  (with-doc ("test" doc)
     (is-true
      (typep doc '<text-node>))
     (is (equal (text doc) "test"))))
@@ -50,7 +50,7 @@
   (trivial-check "quote" <block-quote>))
 
 (test code-block
-  (with-first-doc ("\\code[language=lisp]{test}" doc)
+  (with-doc ("\\code[language=lisp]{test}" doc)
     (is-true (typep doc '<code-block>))
     (is (equal (language doc) "lisp"))))
 
