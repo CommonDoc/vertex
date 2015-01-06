@@ -45,13 +45,13 @@
   (trivial-check "sup" <superscript>)
   (trivial-check "sub" <subscript>))
 
+(test code-block
+  (with-doc ("\\code[lang=lisp]{test}" doc)
+    (is-true (typep doc '<code-block>))
+    (is (equal (language doc) "lisp"))))
+
 (test quotes
   (trivial-check "q" <inline-quote>)
   (trivial-check "quote" <block-quote>))
-
-(test code-block
-  (with-doc ("\\code[language=lisp]{test}" doc)
-    (is-true (typep doc '<code-block>))
-    (is (equal (language doc) "lisp"))))
 
 (run! 'tests)
