@@ -11,6 +11,7 @@
                 :serial t
                 :components
                 ((:file "parser")
+                 (:file "emitter")
                  (:file "vertex"))))
   :description "A markup language with TeX syntax."
   :long-description

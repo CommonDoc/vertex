@@ -30,28 +30,28 @@
 (test text
   (with-doc ("test" doc)
     (is-true
-     (typep doc '<text-node>))
+     (typep doc 'text-node))
     (is (equal (text doc) "test"))))
 
 (test paragraph
-  (trivial-check "p" <paragraph>))
+  (trivial-check "p" paragraph))
 
 (test markup
-  (trivial-check "b" <bold>)
-  (trivial-check "i" <italic>)
-  (trivial-check "u" <underline>)
-  (trivial-check "strike" <strikethrough>)
-  (trivial-check "c" <code>)
-  (trivial-check "sup" <superscript>)
-  (trivial-check "sub" <subscript>))
+  (trivial-check "b" bold)
+  (trivial-check "i" italic)
+  (trivial-check "u" underline)
+  (trivial-check "strike" strikethrough)
+  (trivial-check "c" code)
+  (trivial-check "sup" superscript)
+  (trivial-check "sub" subscript))
 
 (test code-block
   (with-doc ("\\code[lang=lisp]{test}" doc)
-    (is-true (typep doc '<code-block>))
+    (is-true (typep doc 'code-block))
     (is (equal (language doc) "lisp"))))
 
 (test quotes
-  (trivial-check "q" <inline-quote>)
-  (trivial-check "quote" <block-quote>))
+  (trivial-check "q" inline-quote)
+  (trivial-check "quote" block-quote))
 
 (run! 'tests)

@@ -4,6 +4,8 @@
 
 A markup language with TeX syntax.
 
+# Syntax
+
 # License
 
 Copyright (c) 2014 Fernando Borretti
