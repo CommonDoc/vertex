@@ -30,7 +30,7 @@ A paragraph.
 ```tex
 \p{A paragraph.}
 
-\{Another paragraph.}
+\p{Another paragraph.}
 ```
 
 ### `b`
@@ -70,7 +70,7 @@ This text is \strike{struck through}.
 Superscript and subscript.
 
 ```tex
-The value of the vacuum permittivity, ε\sub{0}, is 8.8x10\sup{-12}
+The value of the vacuum permittivity, ε\sub{0}, is 8.8x10\sup{-12}.
 ```
 
 ## Code
@@ -100,9 +100,27 @@ A block of code.
 
 An inline quote.
 
+```tex
+
+```
+
 ### `quote`
 
 A block quote.
+
+```tex
+
+```
+
+## Links and References
+
+### `link`
+
+A link to a URI.
+
+```tex
+Visit \link[uri='https://www.google.com/']{Google}.
+```
 
 # License
 
