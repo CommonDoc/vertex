@@ -1,7 +1,7 @@
 (in-package :cl-user)
 (defpackage vertex
   (:use :cl :common-doc.format)
-  (:export :<vertex>)
+  (:export :vertex)
   (:documentation "The main interface."))
 (in-package :vertex)
 
