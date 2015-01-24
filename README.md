@@ -180,6 +180,43 @@ A definition list.
 }
 ```
 
+## Images and Figures
+
+## Tables
+
+### `table`, `row`, `cell`
+
+Exactly what you would expect.
+
+```tex
+\table{
+  \row{
+    \cell{}
+    \cell{\b{Peach}}
+    \cell{\b{Egg}}
+  }
+  \row{
+    \cell{\i{Fat}}
+    \cell{0.25g}
+    \cell{10.6g}
+  }
+  \row{
+    \cell{\i{Protein}}
+    \cell{0.91g}
+    \cell{12.6g}
+  }
+}
+```
+
+Produces:
+
+|             | **Peach** | **Egg** |
+| ----------- | --------- | ------- |
+| *Fat*       | 0.25g     | 10.6g   |
+| *Protein*   | 0.91g     | 12.6g   |
+
+## Structure
+
 # License
 
 Copyright (c) 2014 Fernando Borretti
