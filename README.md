@@ -114,12 +114,70 @@ A block quote.
 
 ## Links and References
 
+### `ref`
+
+A reference to a section of the document, or to another document.
+
+```tex
+See section \ref[sec=search]{Search}.
+
+For a more thorough discussion, see \ref[doc=aima, sec=search]{the AIMA chapter}
+on search algorithms.
+```
+
 ### `link`
 
 A link to a URI.
 
 ```tex
 Visit \link[uri='https://www.google.com/']{Google}.
+```
+
+## Lists
+
+### `list`
+
+An unordered list.
+
+```tex
+Ingredients:
+
+\list{
+  \item{One egg}
+  \item{One tablespoon of olive oil}
+  \item{Grated cheese}
+}
+```
+
+### `enum`
+
+An ordered list.
+
+```tex
+Recipe for eudoxia's patent-pending microwave eggs:
+
+\enum{
+  \item{Pour the olive oil into the bowl}
+  \item{Crack the egg into it}
+  \item{Put the cheese on top}
+  \item{Microwave for 45 seconds}
+}
+```
+
+### `deflist`
+
+A definition list.
+
+```tex
+\deflist{
+  \term{Sum Rule}
+  \def{If two tasks can be performed in m and n ways, respectively, then
+  there are m+n ways of doing \b{either}.}
+
+  \term{Product Rule}
+  \def{If two sequential tasks can be performed in m and n ways,
+  respectively, there are m*n ways of performing the sequence.}
+}
 ```
 
 # License
