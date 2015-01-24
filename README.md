@@ -224,6 +224,20 @@ Produces:
 
 ## Structure
 
+### `section`
+
+Defines a section.
+
+```tex
+\section[title=The Reader]{
+  ... For other stuff see the chapter on \ref[sec=compiler]{Compilation}.
+}
+
+\section[title=The Compiler, ref=compiler]{
+  ... A compiler is basically ...
+}
+```
+
 # License
 
 Copyright (c) 2014 Fernando Borretti
