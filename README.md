@@ -149,6 +149,12 @@ Ingredients:
 }
 ```
 
+Produces:
+
+* One egg
+* One tablespoon of olive oil
+* Grated cheese
+
 ### `enum`
 
 An ordered list.
@@ -163,6 +169,13 @@ Recipe for eudoxia's patent-pending microwave eggs:
   \item{Microwave for 45 seconds}
 }
 ```
+
+Produces:
+
+1. Pour the olive oil into the bowl
+2. Crack the egg into it
+3. Put the cheese on top
+4. Microwave for 45 seconds
 
 ### `deflist`
 
