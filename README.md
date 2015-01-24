@@ -191,19 +191,13 @@ Exactly what you would expect.
 ```tex
 \table{
   \row{
-    \cell{}
-    \cell{\b{Peach}}
-    \cell{\b{Egg}}
+    \cell{} \cell{\b{Peach}} \cell{\b{Egg}}
   }
   \row{
-    \cell{\i{Fat}}
-    \cell{0.25g}
-    \cell{10.6g}
+    \cell{\i{Fat}} \cell{0.25g} \cell{10.6g}
   }
   \row{
-    \cell{\i{Protein}}
-    \cell{0.91g}
-    \cell{12.6g}
+    \cell{\i{Protein}} \cell{0.91g} \cell{12.6g}
   }
 }
 ```
