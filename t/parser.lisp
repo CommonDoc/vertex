@@ -33,8 +33,19 @@
      (typep doc 'text-node))
     (is (equal (text doc) "test"))))
 
+(defparameter +paragraph-text+
+"paragraph 1
+
+paragraph with \\b{bold}.
+
+paragraph 3.")
+
 (test paragraph
-  (trivial-check "p" paragraph))
+  (with-doc (+paragraph-text+ doc)
+    (is (equal (length (children doc))
+               3))
+    (is (equal (text (first (children (first (children doc)))))
+               "paragraph 1"))))
 
 (test markup
   (trivial-check "b" bold)
