@@ -23,14 +23,16 @@ The syntax, as a sort of regular expression, is like this:
 
 ## Markup
 
-### `p`
+### Paragraphs
 
-A paragraph.
+Paragraphs are delimited by double newlines.
 
 ```tex
-\p{A paragraph.}
+A paragraph.
 
-\p{Another paragraph.}
+Another paragraph with \b{bold text}.
+
+A third paragraph.
 ```
 
 ### `b`
