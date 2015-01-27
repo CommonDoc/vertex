@@ -2,8 +2,10 @@
   :author "Fernando Borretti <eudoxiahp@gmail.com>"
   :maintainer "Fernando Borretti <eudoxiahp@gmail.com>"
   :license "MIT"
-  :homepage "https://github.com/CommonDoc/vertex"
   :version "0.1"
+  :homepage "https://github.com/CommonDoc/vertex"
+  :bug-tracker "https://github.com/CommonDoc/vertex/issues"
+  :source-control (:git "git@github.com:CommonDoc/vertex.git")
   :depends-on (:common-doc
                :common-doc-plump
                :plump-tex)
