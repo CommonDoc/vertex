@@ -44,8 +44,11 @@ paragraph 3.")
   (with-doc (+paragraph-text+ doc)
     (is (equal (length (children doc))
                3))
-    (is (equal (text (first (children (first (children doc)))))
-               "paragraph 1"))))
+    (let ((first-para (first (children doc))))
+      (is-true
+       (typep first-para 'paragraph))
+      (is (equal (text (first (children first-para)))
+                 "paragraph 1")))))
 
 (test markup
   (trivial-check "b" bold)
