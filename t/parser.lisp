@@ -11,7 +11,7 @@
   (first (children document)))
 
 (defmacro with-doc ((string doc) &rest body)
-  `(let ((,doc (parse-string ,string)))
+  `(let ((,doc (first (children (parse-string ,string)))))
      ,@body))
 
 (defmacro trivial-check (tag class)

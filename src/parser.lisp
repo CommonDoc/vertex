@@ -7,10 +7,12 @@
 (in-package :vertex.parser)
 
 (defun input->common-doc (input)
-  (common-doc-plump.parser:parse (plump-tex:parse input)))
+  (common-doc-plump.parser:parse-document (plump-tex:parse input)))
 
 (defun parse-string (string)
+  "Parse a VerTeX string."
   (input->common-doc string))
 
 (defun parse-file (pathname)
+  "Parse a VerTeX file."
   (input->common-doc pathname))
