@@ -7,7 +7,8 @@
 (in-package :vertex.parser)
 
 (defun input->common-doc (input)
-  (common-doc-plump.parser:parse-document (plump-tex:parse input)))
+  (let ((common-doc-plump.parser:*serializer* #'plump-tex:serialize))
+    (common-doc-plump.parser:parse-document (plump-tex:parse input))))
 
 (defun parse-string (string)
   "Parse a VerTeX string."
