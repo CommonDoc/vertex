@@ -10,9 +10,9 @@ install:
   # Install cl-travis
   - curl https://raw.githubusercontent.com/luismbo/cl-travis/master/install.sh | bash
   # Clone the latest common-doc
-  - git clone https://github.com/CommonDoc/common-doc.git quicklisp/local-projects/common-doc
+  - git clone https://github.com/CommonDoc/common-doc.git ~/lisp/common-doc
   # Clone the latest common-doc-plump
-  - git clone https://github.com/CommonDoc/common-doc-plump.git quicklisp/local-projects/common-doc-plump
+  - git clone https://github.com/CommonDoc/common-doc-plump.git ~/lisp/common-doc-plump
 
 script:
   - cl -e '(ql:quickload :fiveam)'
